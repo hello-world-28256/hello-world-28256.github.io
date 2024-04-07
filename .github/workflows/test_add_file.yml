@@ -13,8 +13,6 @@ jobs:
     - uses: actions/checkout@v4
 
     - name: Add a file in blog/test_file
-      run: mkdir -p blog/test
-           touch blog/test/test_file
-
-    - name: Write some data in blog/test_file
-      run: echo 123456 > blog/test/test_file
+      run: |
+           mkdir -p ./blog
+           touch ./blog/test.txt
