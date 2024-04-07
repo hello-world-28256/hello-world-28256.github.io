@@ -10,10 +10,10 @@ jobs:
   add_file:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v4
+    - name: Checkout repository
+      uses: actions/checkout@v4
 
     - name: Add a file in blog/test_file
-      run: mkdir -p ./blog
-      
-    - name: Add a file in blog/test_file
-      run: touch ./blog/test_file.txt
+      run: |
+           mkdir -p ./blog
+           touch ./blog/test_file.txt
