@@ -1,6 +1,6 @@
 name:test_add_file
 
-on:
+on: 
  push:
   branches: [ "develop" ]
 pull_request:
