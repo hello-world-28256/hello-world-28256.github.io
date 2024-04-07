@@ -1,0 +1,19 @@
+name:test_add_file
+
+on:
+ push:
+  branches: [ "develop" ]
+pull_request:
+  branches: [ "develop" ]
+
+job:
+ add_file:
+  runs_on: ubuntu-latest
+steps:
+ - uses: actions/checkout@v4
+
+ - name: add a file in blog/test_file
+   run: touch blog/test_file
+
+ - name: write some data in blog/test_file
+   run: echo 123456 > blog/test_file
