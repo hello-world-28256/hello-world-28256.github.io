@@ -1,0 +1,27 @@
+name: test_npm2
+
+on:								# 触发条件
+  push:
+    branches: [ "develop" ]		# 向develop分支推送代码时
+  pull_request:
+    branches: [ "develop" ]
+
+jobs:
+  test_npm2:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4.0.2
+      with:
+        node-version: 'latest'
+
+    - name: Install project dependencies
+      run: npm install
+
+   # - name: Create a website page
+   #   run: |
+   #     npm run build
+   #     npm run serve
