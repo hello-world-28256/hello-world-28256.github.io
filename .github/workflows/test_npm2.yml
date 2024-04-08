@@ -1,6 +1,6 @@
 name: test_npm2
 
-on:	
+on:
   push:
     branches: [ "develop" ]
   pull_request:
@@ -13,15 +13,24 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v4
 
+    - name: Cache Node.js modules
+      id: cache-node-modules
+      uses: actions/cache@v3
+      with:
+        path: node_modules
+        key: ${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-
+
     - name: Setup Node.js
       uses: actions/setup-node@v4.0.2
       with:
         node-version: 'latest'
 
     - name: Install project dependencies
-      run: npm install
+      run: npm ci # 使用npm ci代替npm install，ci命令适用于持续集成场景，会严格按lockfile安装，速度更快
 
-   # - name: Create a website page
-   #   run: |
-   #     npm run build
-   #     npm run serve
+    - name: Create a website page (Build and Serve)
+      run: |
+        npm run build -- --prod 
+        npm run serve
