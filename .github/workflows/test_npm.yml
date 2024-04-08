@@ -1,0 +1,19 @@
+name: test_npm_script
+
+on:
+  push:
+    branches: [ "develop" ]
+  pull_request:
+    branches: [ "develop" ]
+
+jobs:
+  test_npm:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: create a website page
+      run: |
+           npm run build
+           npm run serve
