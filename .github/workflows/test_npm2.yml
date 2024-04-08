@@ -1,4 +1,4 @@
-name: test_npm_script
+name: test_npm2
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
     branches: [ "develop" ]
 
 jobs:
-  test_npm:
+  test_npm2:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout repository
