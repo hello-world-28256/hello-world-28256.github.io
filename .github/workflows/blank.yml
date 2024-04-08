@@ -1,36 +1,47 @@
-# This is a basic workflow to help you get started with Actions
+name: test_npm_file
 
-name: deve_test
-
-# Controls when the workflow will run
 on:
-  # Triggers the workflow on push or pull request events but only for the "main" branch
   push:
     branches: [ "develop" ]
   pull_request:
     branches: [ "develop" ]
 
-  # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
-
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
-  deve_test:
-    # The type of runner that the job will run on
+  test_npm_fas:
     runs-on: ubuntu-latest
-
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v4
-          
-      # Runs a single command using the runners shell
-      - name: Run a one-line script
-        run: echo Hello, world!
+    - name: Checkout repository
+      uses: actions/checkout@v4
 
-      # Runs a set of commands using the runners shell
-      - name: Run a multi-line script
-        run: |
-          echo Add other actions to build,
-          echo test, and deploy your project.
+    - name: Cache Node.js modules
+      id: cache-node-modules
+      uses: actions/cache@v3
+      with:
+        path: node_modules
+        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-node-
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '16.x'  # 保持稳定且高效的Node.js版本
+
+    - name: Install project dependencies
+      if: steps.cache-node-modules.outputs.cache-hit != 'true'
+      run: npm ci
+
+    # 修改为并行运行两个job，分别对应build和serve命令
+    - name: Build
+      run: npm run build
+      shell: bash
+      concurrency: build_and_serve
+      env:
+        TASK_COMMAND: build
+
+    - name: Serve
+      run: npm run serve
+      shell: bash
+      concurrency: build_and_serve
+      env:
+        TASK_COMMAND: serve
