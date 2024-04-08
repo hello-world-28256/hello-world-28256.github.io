@@ -20,7 +20,3 @@ jobs:
 
     - name: Install project dependencies
       run: npm install
-
-    - name: Create a website page
-      run: |
-        npm run build
