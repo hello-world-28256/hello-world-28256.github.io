@@ -1,4 +1,4 @@
-name: test_npm_script
+name: test_npm
 
 on:
   push:
@@ -23,5 +23,4 @@ jobs:
 
     - name: Create a website page
       run: |
-        npm run build
-        npm run serve
+        npm run start
