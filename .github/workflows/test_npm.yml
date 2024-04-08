@@ -14,7 +14,9 @@ jobs:
       uses: actions/checkout@v4
 
     - name: install node
-      run: nvm install node
+      run: |
+      curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
+      nvm install node
 
     - name: install npm
       run: nvm install-latest-npm
