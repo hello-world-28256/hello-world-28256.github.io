@@ -13,10 +13,10 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v4
 
-    - name: Install Node.js and NPM
-      run: |
-        curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
-        nvm install node
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: 'latest'
 
     - name: Install project dependencies
       run: npm install
@@ -25,4 +25,3 @@ jobs:
       run: |
         npm run build
         npm run serve
-
