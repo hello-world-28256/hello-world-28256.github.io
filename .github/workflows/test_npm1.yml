@@ -28,3 +28,6 @@ jobs:
         key: ${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
         restore-keys: |
           ${{ runner.os }}-
+
+    - name: Create a website page
+      run: npm run start
