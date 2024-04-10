@@ -1,0 +1,32 @@
+name: test1
+
+on:		
+  push:
+    branches: [ "develop" ]	
+  pull_request:
+    branches: [ "develop" ]
+
+jobs:
+  test1:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4.0.2
+      with:
+        node-version: 'latest'
+
+    - name: Install project dependencies
+      run: npm install
+
+    - name: Cache Node.js modules
+      uses: actions/cache@v3
+      with:
+        path: node_modules
+        key: ${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}	
+        restore-keys: |
+          ${{ runner.os }}-
+    - name: Create a website page
+      run: npm run start
