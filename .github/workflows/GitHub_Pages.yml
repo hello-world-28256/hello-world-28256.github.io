@@ -24,4 +24,4 @@ jobs:
         token: ${{ secrets.ACCESS_TOKEN }}
         branch: gh-pages
         folder: build
-        BUILD_SCRIPT: npm install && npm run build
+        # BUILD_SCRIPT: npm install && npm run build
