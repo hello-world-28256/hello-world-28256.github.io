@@ -221,7 +221,7 @@ module.exports = {
           rehypePlugins: [katex],
           // showLastUpdateTime: true,
           editUrl:
-            "https://github.com/hello-world-28256/hello-world-28256.github.io/tree/master", // 项目url
+            "https://github.com/hello-world-28256/hello-world-28256.github.io/tree/main", // 项目url
         },
         blog: {
           showReadingTime: true,
@@ -230,7 +230,7 @@ module.exports = {
           blogSidebarTitle: "近期文章",
           rehypePlugins: [katex],
           editUrl:
-            "https://github.com/hello-world-28256/hello-world-28256.github.io/blob/master",
+            "https://github.com/hello-world-28256/hello-world-28256.github.io/blob/main",
         },
         theme: {
           customCss: require.resolve("./src/css/custom.css"), // 主题使用的css
